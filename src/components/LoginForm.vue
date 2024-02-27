@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import {ref} from "vue"
+import useAuthCalls from "@/hooks/useAuthCalls"
+import { useAuthStore } from '@/stores/auth'
+
+const {user} = useAuthStore()
+const {signIn} = useAuthCalls()
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*.])(?=.{8,})[a-zA-Z0-9!@#$%^&*.]+$/
 const message="Password must contain at least one number one lowercase letter one uppercase letter and one custom character."
 const isValid=ref(true)
-console.log(isValid);
+// console.log(isValid);
 
 async function login (values:any) {
 isValid.value = passwordRegex.test(values.password);
+
+isValid.value && signIn(values)
+
 
 }
 
