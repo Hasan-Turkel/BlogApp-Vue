@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { Icon } from '@iconify/vue'
+import { useAuthStore } from '@/stores/auth'
+const {user:{username}, user} = useAuthStore()
 
-const user = false
 const person = 'text-danger'
 </script>
 <template>
   <nav class="navbar navbar-expand-md ps-4">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" to="/">
-        <h2>BLOG-APP</h2>
+        <h2>BlogApp</h2>
       </RouterLink>
       <button
         class="navbar-toggler me-auto"
@@ -33,25 +34,25 @@ const person = 'text-danger'
       </div>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-          <Icon icon="mdi:person" :class="!user ? 'text-white' : 'text-success'" class="fs-2" />
+          <Icon icon="mdi:person" :class="!user.username ? 'text-white' : 'text-success'" class="fs-2" />
           
         </a>
-        <ul v-if="!user" class="dropdown-menu">
-          <li>
+       
+        <ul class="dropdown-menu">
+          <li v-if="user.username">
+            <RouterLink class="dropdown-item" to="my-blogs"> My Blogs </RouterLink>
+          </li>
+          <li v-if="user.username">
+            <RouterLink class="dropdown-item" to="profile"> Profile </RouterLink>
+          </li>
+          <li v-if="user.username">
+            <p class="dropdown-item" role="button">Logout</p>
+          </li>
+          <li v-if="!user.username">
             <RouterLink class="dropdown-item" to="login"> Login </RouterLink>
           </li>
         </ul>
-        <ul v-else class="dropdown-menu">
-          <li>
-            <RouterLink class="dropdown-item" to="my-blogs"> My Blogs </RouterLink>
-          </li>
-          <li>
-            <RouterLink class="dropdown-item" to="profile"> Profile </RouterLink>
-          </li>
-          <li>
-            <p class="dropdown-item" role="button">Logout</p>
-          </li>
-        </ul>
+
       </li>
     </div>
   </nav>

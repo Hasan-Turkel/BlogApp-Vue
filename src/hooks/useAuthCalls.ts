@@ -18,21 +18,17 @@ const useAuthCalls = () => {
       router.push('/')
     } catch (error) {}
   }
+  const signUp = async (values: any) => {
+    try {
+      const { data } = await axiosSimple.post(`users/auth/register/`, values)
+       console.log(data);
 
-  //   const register = async (values) => {
-  //     dispatch(fetchStart());
-  //     try {
-  //       const { data } = await axios.post(`${BASE_URL}/users/auth/register/`, values);
-  //       dispatch(registerSuccess(data));
-  //       toastSuccessNotify("Register performed.")
-  //       navigate("/");
-  //       // console.log(data);
-  //     } catch (error) {
-  //       // console.log(error);
-  //       dispatch(fetchFail());
-  //       toastErrorNotify("Register failed")
-  //     }
-  //   };
+      auth.$patch({ user: data, token: data.key })
+      router.push('/')
+    } catch (error) {}
+  }
+
+
   //   const logout = async () => {
   //     dispatch(fetchStart());
   //     try {
@@ -47,7 +43,7 @@ const useAuthCalls = () => {
   //     }
   //   };
 
-  return { signIn }
+  return { signIn, signUp }
 }
 
 export default useAuthCalls
