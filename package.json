@@ -13,6 +13,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@formkit/themes": "^1.5.9",
+    "@formkit/vue": "^1.5.9",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
