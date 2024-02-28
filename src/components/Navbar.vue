@@ -10,7 +10,7 @@ const person = 'text-danger'
   <nav class="navbar navbar-expand-md ps-4">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" to="/">
-        <h2>BlogApp</h2>
+        <h2>BLOG-APP</h2>
       </RouterLink>
       <button
         class="navbar-toggler me-auto"
@@ -29,7 +29,7 @@ const person = 'text-danger'
           <RouterLink class="nav-link fw-bolder" aria-current="page" to="/new-blog">
             New Blog
           </RouterLink>
-          <RouterLink class="nav-link fw-bolder" aria-current="page" to="about"> About </RouterLink>
+          <RouterLink class="nav-link fw-bolder" aria-current="page" to="/about"> About </RouterLink>
         </div>
       </div>
       <li class="nav-item dropdown">
@@ -40,10 +40,10 @@ const person = 'text-danger'
        
         <ul class="dropdown-menu">
           <li v-if="user.username">
-            <RouterLink class="dropdown-item" to="my-blogs"> My Blogs </RouterLink>
+            <RouterLink class="dropdown-item" to="/my-blogs"> My Blogs </RouterLink>
           </li>
           <li v-if="user.username">
-            <RouterLink class="dropdown-item" to="profile"> Profile </RouterLink>
+            <RouterLink class="dropdown-item" to="/profile"> Profile </RouterLink>
           </li>
           <li v-if="user.username">
             <p class="dropdown-item" role="button">Logout</p>

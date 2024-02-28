@@ -1,5 +1,5 @@
 
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import useAxios from "./useAxios"
 import { useAuthStore } from '@/stores/auth'
 const useBlogCalls = () => {
@@ -7,6 +7,9 @@ const useBlogCalls = () => {
   const {user} = useAuthStore()
 
     const data = ref<any[]>([])
+    let detailData = reactive({author: "", category: "", category_name : "",comment_count:0,comments: [],content: 
+      "",createdAt: "",id: "",image: "", likes: 0,likes_n: [],post_views: 0,publish_date: "",
+      status:"",title: ""})
     
     const { axiosSimple, axiosWithToken } = useAxios()
  
@@ -113,10 +116,19 @@ const useBlogCalls = () => {
       // console.log(error);
     }
   };
+  const getDetailBlog = async (id:string | string[]) => {
+    try {
+      const { data:blog } = await axiosWithToken(`api/blogs/${id}/`, 
+      );
+Object.assign(detailData, blog)
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
 
 
-  return {getHomeBlogs, getMyBlogs,  data};
+  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData};
 };
 
 export default useBlogCalls;

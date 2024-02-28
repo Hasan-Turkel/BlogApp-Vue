@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
 import { Icon } from '@iconify/vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const {user} = useAuthStore()
 
 const props = defineProps(["blog"])
@@ -32,7 +35,7 @@ const like = props.blog.likes_n?.filter((item:any) => item.user_id == user?.id).
             <Icon icon="mdi:eye-outline" class="fs-4" /><span>{{blog.post_views}}</span>
           </div> 
 
-        <button className="btn btn-primary mt-2 ">Read More</button>
+        <button className="btn btn-primary mt-2 " @click="router.push('/detail/'+blog.id)">Read More</button>
       </div>
     </div>
   </div>
