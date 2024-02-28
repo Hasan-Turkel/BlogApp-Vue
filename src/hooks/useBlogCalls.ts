@@ -1,11 +1,14 @@
 
 import { ref } from "vue";
 import useAxios from "./useAxios"
+import { useAuthStore } from '@/stores/auth'
 const useBlogCalls = () => {
+
+  const {user} = useAuthStore()
 
     const data = ref<any[]>([])
     
-    const { axiosSimple } = useAxios()
+    const { axiosSimple, axiosWithToken } = useAxios()
  
 //   const likeUnlike = async (id) => {
 //     dispatch(fetchStart());
@@ -91,7 +94,7 @@ const useBlogCalls = () => {
   const getHomeBlogs = async () => {
 
     try {
-      const { data:blogs } = await axiosSimple(`/api/blogs/`
+      const { data:blogs } = await axiosSimple(`api/blogs/`
       );
      data.value=blogs
       // console.log(data);
@@ -101,8 +104,19 @@ const useBlogCalls = () => {
     }
   };
 
+  const getMyBlogs = async () => {
+    try {
+      const {  data:blogs } = await axiosWithToken(`api/blogs?author=${user.id}`);
+      data.value=blogs
+      // console.log(data);
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
-  return {getHomeBlogs, data};
+
+
+  return {getHomeBlogs, getMyBlogs,  data};
 };
 
 export default useBlogCalls;

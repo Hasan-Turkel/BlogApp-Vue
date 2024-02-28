@@ -1,21 +1,22 @@
 
 import axios from "axios"
+import { useAuthStore } from '@/stores/auth'
+
 
 const useAxios = () => {
-//   const { token } = useSelector((state) => state.auth)
-
-//   const axiosWithToken = axios.create({
-//     baseURL: `${import.meta.env.VITE_BASE_URL}`,
-//     headers: { Authorization: `Token ${token}` },
-//   })
+  const {token} = useAuthStore()
 
   const axiosSimple = axios.create({
     baseURL: `${import.meta.env.VITE_BASE_URL}`
   })
 
+  const axiosWithToken = axios.create({
+    baseURL: `${import.meta.env.VITE_BASE_URL}`,
+    headers: { Authorization: `Token ${token}` },
+  })
 
 
-  return {axiosSimple}
+  return {axiosSimple, axiosWithToken}
 }
 
 export default useAxios

@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/auth';
 import { Icon } from '@iconify/vue'
+const {user} = useAuthStore()
 
 const props = defineProps(["blog"])
 
 
 // console.log(props.blog);
 
-const like = "text-warning"
-
-// props.blog.likes_n?.filter((item:any) => item.user_id == user?._id).length && "text-danger";
+const like = props.blog.likes_n?.filter((item:any) => item.user_id == user?.id).length && "text-danger";
 
 
 </script>
@@ -30,18 +30,6 @@ const like = "text-warning"
             <Icon icon="mdi:heart" class="fs-4" :class="like" /> <span>{{blog.likes}}</span>
             <Icon icon="mdi:message-outline" class="fs-4" /><span>{{blog. comment_count}}</span>
             <Icon icon="mdi:eye-outline" class="fs-4" /><span>{{blog.post_views}}</span>
-
-
-           <!-- <AiFillHeart
-              className={"fs-4 " + like}
-              // role="button"
-              // onClick={handleClick}
-            />
-            <span>{likes}</span>
-            <BiComment className="fs-4" />
-            <span>{comment_count}</span>
-            <AiOutlineEye className="fs-4" />
-            <span>{post_views}</span>-->
           </div> 
 
         <button className="btn btn-primary mt-2 ">Read More</button>

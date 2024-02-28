@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useAuthStore } from '@/stores/auth'
-const {user:{username}, user} = useAuthStore()
+const {user} = useAuthStore()
 
 const person = 'text-danger'
 </script>
