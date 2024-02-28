@@ -7,7 +7,7 @@ const useBlogCalls = () => {
   const {user} = useAuthStore()
 
     const data = ref<any[]>([])
-    let detailData = reactive({author: "", category: "", category_name : "",comment_count:0,comments: [],content: 
+    let detailData = reactive({author: "", category: "", category_name : "",comment_count:0,comments: [{content:"", user:"", time_stamp:""}],content: 
       "",createdAt: "",id: "",image: "", likes: 0,likes_n: [],post_views: 0,publish_date: "",
       status:"",title: ""})
     
