@@ -8,9 +8,6 @@ const {user} = useAuthStore()
 
 const props = defineProps(["blog"])
 
-
-// console.log(props.blog);
-
 const like = props.blog.likes_n?.filter((item:any) => item.user_id == user?.id).length && "text-danger";
 
 

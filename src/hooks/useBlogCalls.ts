@@ -2,10 +2,11 @@
 import { reactive, ref } from "vue";
 import useAxios from "./useAxios"
 import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 const useBlogCalls = () => {
 
   const {user} = useAuthStore()
-
+  const router = useRouter()
     const data = ref<any[]>([])
     let detailData = reactive({author: "", category: "", category_name : "",comment_count:0,comments: [{content:"", user:"", time_stamp:""}],content: 
       "",createdAt: "",id: "",image: "", likes: 0,likes_n: [],post_views: 0,publish_date: "",
@@ -32,23 +33,17 @@ const useBlogCalls = () => {
 //     }
 //   };
 
-//   const delBlog = async (id) => {
+  const delBlog = async (id:string) => {
    
-//     try {
-//         const { data } = await axiosWithToken.delete(`/api/blogs/${id}/`,
-//     );
-//       toastSuccessNotify("The blog has been deleted.")
-//       navigate(-1)
-//       // console.log(data);
-//       // console.log(id);
-      
-//     } catch (error) {
-//       // console.log(error.message);
-//       // console.log(id);
+    try {
+        const { data } = await axiosWithToken.delete(`api/blogs/${id}/`,
+    );
+      router.go(-1)
+    } catch (error) {
     
-//       toastErrorNotify("Delete failed.")
-//     }
-//   };
+    }
+  };
+
 //   const updateBlog = async (values) => {
    
 //     try {
@@ -128,7 +123,7 @@ Object.assign(detailData, blog)
 
 
 
-  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData};
+  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog};
 };
 
 export default useBlogCalls;

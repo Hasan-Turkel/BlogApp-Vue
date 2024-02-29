@@ -5,6 +5,8 @@ import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useAuthStore } from '@/stores/auth'
+import DeleteModal from '@/components/DeleteModal.vue'
+import UpdateModal from '@/components/UpdateModal.vue'
 const { user } = useAuthStore()
 const route = useRoute()
 const id = route.params.id
@@ -47,21 +49,21 @@ onMounted(() => {
         </button>
       </div>
 
-      <!-- <DeleteModal id={id} />
-            <UpdateModal id={id} data={data} getDetailCard={getDetailCard} /> -->
+      <DeleteModal  :id="data.id"  />
+      <UpdateModal  />
 
-            <template v-for="comment in data.comments" :key="comment.id">
-               
-                <div className="mb-2">
-                         <p className="m-0">{{comment.content}}</p>
-                         <p className="m-0">
-                            <Icon icon="mdi:person" class="fs-2" />{{comment.user}}
-                         </p>
-                         <p className="m-0">{{comment.time_stamp}}</p>
-                         <hr />
-         
-                     </div>
-            </template>
+      <template v-for="comment in data.comments" :key="comment.id">
+
+        <div className="mb-2">
+          <p className="m-0">{{ comment.content }}</p>
+          <p className="m-0">
+            <Icon icon="mdi:person" class="fs-2" />{{ comment.user }}
+          </p>
+          <p className="m-0">{{ comment.time_stamp }}</p>
+          <hr />
+
+        </div>
+      </template>
 
 
       <CommentCard />
