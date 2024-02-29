@@ -61,19 +61,18 @@ const useBlogCalls = () => {
     }
   };
 
-//   const sendBlog = async (values) => {
+  const sendBlog = async (values:any) => {
 
-//     try {
-//       const { data } = await axiosWithToken.post(`/api/blogs/`, values, 
-//       );
-//       toastSuccessNotify("The blog has been created.")
-//       navigate("/my-blogs")
-//       // console.log(data);
-//     } catch (error) {
-//       // console.log(error.message);
-//       toastErrorNotify("Creating blog failed.")
-//     }
-//   };
+    try {
+      const { data } = await axiosWithToken.post(`/api/blogs/`, values, 
+      );
+     
+      router.push("/my-blogs")
+      // console.log(data);
+    } catch (error) {
+     
+    }
+  };
 
   const getHomeBlogs = async () => {
 
@@ -107,9 +106,19 @@ Object.assign(detailData, blog)
     }
   };
 
+  const getCat = async () => {
+    try {
+      const { data:cats } = await axiosSimple(
+        `api/categories/`);
+        data.value=cats
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
 
-  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog, likeUnlike, sendComment};
+
+  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog, likeUnlike, sendComment, getCat, sendBlog };
 };
 
 export default useBlogCalls;
