@@ -24,7 +24,6 @@ onMounted(() => {
   getDetailBlog(id)
 })
 
-console.log(data?.likes_n);
 
 </script>
 
@@ -76,7 +75,7 @@ console.log(data?.likes_n);
       </template>
 
 
-      <CommentCard />
+      <CommentCard :id="data.id" :getDetailBlog="getDetailBlog"/>
     </div>
   </div>
 </template>

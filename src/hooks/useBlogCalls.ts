@@ -52,18 +52,14 @@ const useBlogCalls = () => {
 //     }
 //   };
 
-//   const sendComment = async (values, id) => {
+  const sendComment = async (values:any, id:string) => {
 
-//     try {
-//       const { data } = await axiosWithToken.post(`/api/comments/${id}/`, values 
-//      );
-//       toastSuccessNotify("Comment has been sent.")
-//       console.log(data);
-//     } catch (error) {
-//       console.log(error.message);
-//       toastErrorNotify("Sendin comment failed.")
-//     }
-//   };
+    try {
+      const { data } = await axiosWithToken.post(`/api/comments/${id}/`, values 
+     );
+    } catch (error) {
+    }
+  };
 
 //   const sendBlog = async (values) => {
 
@@ -113,7 +109,7 @@ Object.assign(detailData, blog)
 
 
 
-  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog, likeUnlike};
+  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog, likeUnlike, sendComment};
 };
 
 export default useBlogCalls;
