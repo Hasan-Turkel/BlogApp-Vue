@@ -9,29 +9,19 @@ const useBlogCalls = () => {
   const router = useRouter()
     const data = ref<any[]>([])
     let detailData = reactive({author: "", category: "", category_name : "",comment_count:0,comments: [{content:"", user:"", time_stamp:""}],content: 
-      "",createdAt: "",id: "",image: "", likes: 0,likes_n: [],post_views: 0,publish_date: "",
+      "",createdAt: "",id: "",image: "", likes: 0,likes_n: [{user_id:""}],post_views: 0,publish_date: "",
       status:"",title: ""})
     
     const { axiosSimple, axiosWithToken } = useAxios()
  
-//   const likeUnlike = async (id) => {
-//     dispatch(fetchStart());
-//     try {
-//         const { data } = await axiosWithToken.post(`/api/likes/${id}/`,1,
-//         );
-      
-//       // console.log(data);
-//       // console.log(id);
-//       dispatch(likeSuccess());
-//     } catch (error) {
-//       // console.log(error.message);
-//       // console.log(id);
-//       // console.log(token);
-//       dispatch(fetchFail());
+  const likeUnlike = async (id:string | string[]) => {
+    try {
+        const { data } = await axiosWithToken.post(`api/likes/${id}/`,1,
+        );
+    } catch (error) {
     
-//       // toastErrorNotify(error.response.data.non_field_errors[0])
-//     }
-//   };
+    }
+  };
 
   const delBlog = async (id:string) => {
    
@@ -123,7 +113,7 @@ Object.assign(detailData, blog)
 
 
 
-  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog};
+  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog, likeUnlike};
 };
 
 export default useBlogCalls;

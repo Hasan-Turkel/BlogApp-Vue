@@ -11,11 +11,21 @@ const { user } = useAuthStore()
 const route = useRoute()
 const id = route.params.id
 
-const { getDetailBlog, detailData: data } = useBlogCalls()
+const { getDetailBlog, detailData: data, likeUnlike } = useBlogCalls()
+
+const handleLike=()=>{
+    likeUnlike(id)
+    setTimeout(() => {
+      getDetailBlog(id);
+  }, 1000);
+  }
 
 onMounted(() => {
   getDetailBlog(id)
 })
+
+console.log(data?.likes_n);
+
 </script>
 
 <template>
@@ -35,7 +45,7 @@ onMounted(() => {
       </p>
 
       <div className="d-flex align-items-center gap-2 mb-2 ">
-        <Icon icon="mdi:heart" class="fs-4" /> <span>{{ data.likes }}</span>
+        <Icon icon="mdi:heart" class="fs-4" :class="data?.likes_n?.filter((item=> item.user_id==user?.id)).length&&'text-danger'" role="button" @click="handleLike()"/> <span>{{ data.likes }}</span>
         <Icon icon="mdi:message-outline" class="fs-4" /><span>{{ data.comment_count }}</span>
         <Icon icon="mdi:eye-outline" class="fs-4" /><span>{{ data.post_views }}</span>
       </div>
