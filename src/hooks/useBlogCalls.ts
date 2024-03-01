@@ -34,23 +34,18 @@ const useBlogCalls = () => {
     }
   };
 
-//   const updateBlog = async (values) => {
+  const updateBlog = async (values:any, id:any) => {
    
-//     try {
-//         const { data } = await axiosWithToken.put(`/api/blogs/${values.id}/`,values,
-//         );
-//       toastSuccessNotify("The blog has been updated.")
+    try {
+        const { data } = await axiosWithToken.put(`/api/blogs/${id}/`,values,
+        );
      
-//       console.log(data);
-//       // console.log(id);
       
-//     } catch (error) {
-//       console.log(error.message);
-//       // console.log(id);
+    } catch (error) {
+   
     
-//       toastErrorNotify("Update failed.")
-//     }
-//   };
+    }
+  };
 
   const sendComment = async (values:any, id:string) => {
 
@@ -118,7 +113,7 @@ Object.assign(detailData, blog)
 
 
 
-  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog, likeUnlike, sendComment, getCat, sendBlog };
+  return {getHomeBlogs, getMyBlogs,  data, getDetailBlog, detailData, delBlog, likeUnlike, sendComment, getCat, sendBlog, updateBlog };
 };
 
 export default useBlogCalls;

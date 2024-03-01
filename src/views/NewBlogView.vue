@@ -3,10 +3,11 @@ import useBlogCalls from '@/hooks/useBlogCalls'
 import { onMounted } from 'vue'
 
 const {getCat, data, sendBlog} = useBlogCalls()
-
-
 async function create (values:any) {
-    sendBlog(values)
+    // sendBlog(values)
+
+    console.log(values);
+    
 }
 onMounted(() => {
     getCat()
@@ -20,17 +21,20 @@ onMounted(() => {
     type="form"
     submit-label="Create a New Blog"
     @submit="create"
+    
   >
     <FormKit
       name="title"
       label="Title*"
       :validation="[['required']]"
+     
     />
     <FormKit
       type="url"
       name="image"
       label="Image Url*"
       validation="required |url"
+     
      
     />
     <FormKit
@@ -39,19 +43,24 @@ onMounted(() => {
   label="Content*"
   validation="required"
   style="height: 100px; resize: none;"
+
 />
 <FormKit
   type="select"
   label="Categories*"
   name="category"
-  :options="[{label:'Please Choose'}, ...data?.map((item, i)=>({...item, label:item.name, value:item.id}))]"
+  placeholder="Please Choose"
+  :options="data?.map((item, i)=>({...item, label:item.name, value:item.id}))"
   validation="required"
+  
 />
 <FormKit
   type="select"
   label="Status*"
   name="status"
+  placeholder="Please Choose"
   :options="[{label:'Draft', value:'d'}, {label:'Publish', value:'p'}]"
+  validation="required"
 />
 
   </FormKit>

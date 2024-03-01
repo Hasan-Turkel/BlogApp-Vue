@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CommentCard from '@/components/CommentCard.vue'
 import useBlogCalls from '@/hooks/useBlogCalls'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useAuthStore } from '@/stores/auth'
@@ -10,6 +10,9 @@ import UpdateModal from '@/components/UpdateModal.vue'
 const { user } = useAuthStore()
 const route = useRoute()
 const id = route.params.id
+
+
+
 
 const { getDetailBlog, detailData: data, likeUnlike } = useBlogCalls()
 
@@ -23,6 +26,15 @@ const handleLike=()=>{
 onMounted(() => {
   getDetailBlog(id)
 })
+
+const open = ref<boolean>(false);
+
+const showModal = () => {
+  open.value = true;
+};
+const hideModal = () => {
+  open.value = false;
+};
 
 
 </script>
@@ -50,8 +62,8 @@ onMounted(() => {
       </div>
 
       <div v-if="user?.username == data?.author">
-        <button className="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#update">
-          Update
+        <button className="btn btn-primary m-4" @click="showModal" >
+         Update
         </button>
         <button className="btn btn-danger m-4" data-bs-toggle="modal" data-bs-target="#del">
           Delete
@@ -59,7 +71,7 @@ onMounted(() => {
       </div>
 
       <DeleteModal  :id="data.id"  />
-      <UpdateModal  />
+      <UpdateModal  :data="data" :getDetailBlog="getDetailBlog" :open="open" @hideModal="hideModal"/>
 
       <template v-for="comment in data.comments" :key="comment.id">
 
@@ -78,6 +90,10 @@ onMounted(() => {
       <CommentCard :id="data.id" :getDetailBlog="getDetailBlog"/>
     </div>
   </div>
+
+  <div>
+  </div>
+
 </template>
 
 <style scoped>
