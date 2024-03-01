@@ -74,7 +74,7 @@ router.beforeEach((to, from) => {
     // if not, redirect to login page.
     return {
       path: '/login',
-      // save the location we were at to come back later
+      
     }
   }
 })

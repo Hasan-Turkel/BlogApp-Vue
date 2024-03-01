@@ -10,6 +10,9 @@ import router from './router'
 import {Modal} from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
 
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 const app = createApp(App)
 
 app.use(createPinia())
@@ -19,5 +22,9 @@ app.use(plugin, defaultConfig({
   }))
 
 app.use(Modal)
+
+app.use(Vue3Toastify, {
+  autoClose: 2000,
+} as ToastContainerOptions);
 
 app.mount('#app')
