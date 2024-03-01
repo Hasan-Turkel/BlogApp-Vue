@@ -8,6 +8,7 @@ const useAuthCalls = () => {
   const { axiosSimple } = useAxios()
   const router = useRouter()
   
+  const emptyUser = {"username": "", "email": "",  "id": ""}
 
   const signIn = async (values: any) => {
     try {
@@ -29,21 +30,18 @@ const useAuthCalls = () => {
   }
 
 
-  //   const logout = async () => {
-  //     dispatch(fetchStart());
-  //     try {
-  //       await axios.post(`${BASE_URL}/users/auth/logout/`);
-  //       dispatch(logoutSuccess());
-  //       toastSuccessNotify("Logout performed.")
-  //       navigate("/");
-  //     } catch (error) {
-  //       // console.log(error.message);
-  //       dispatch(fetchFail());
-  //       toastErrorNotify("Logout failed.")
-  //     }
-  //   };
+    const logout = async () => {
+      try {
+        await axiosSimple.post(`users/auth/logout/`);
+        auth.$patch({user: emptyUser, token: "" })
+        router.push('/')
+      } catch (error) {
+        // console.log(error.message);
+      
+      }
+    };
 
-  return { signIn, signUp }
+  return { signIn, signUp, logout }
 }
 
 export default useAuthCalls

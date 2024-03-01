@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue"
 import useAuthCalls from "@/hooks/useAuthCalls"
-import { useAuthStore } from '@/stores/auth'
+
 
 const {signIn} = useAuthCalls()
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*.])(?=.{8,})[a-zA-Z0-9!@#$%^&*.]+$/

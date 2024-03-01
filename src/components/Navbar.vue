@@ -2,6 +2,10 @@
 import { RouterLink } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useAuthStore } from '@/stores/auth'
+import useAuthCalls from "@/hooks/useAuthCalls"
+
+
+const {logout} = useAuthCalls()
 const {user} = useAuthStore()
 
 const person = 'text-danger'
@@ -46,7 +50,7 @@ const person = 'text-danger'
             <RouterLink class="dropdown-item" to="/profile"> Profile </RouterLink>
           </li>
           <li v-if="user.username">
-            <p class="dropdown-item" role="button">Logout</p>
+            <p class="dropdown-item" role="button" @click="logout">Logout</p>
           </li>
           <li v-if="!user.username">
             <RouterLink class="dropdown-item" to="login"> Login </RouterLink>
