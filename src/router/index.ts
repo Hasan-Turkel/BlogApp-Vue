@@ -6,6 +6,9 @@ import NewBlogViewVue from '@/views/NewBlogView.vue'
 import MyBlogsViewVue from '@/views/MyBlogsView.vue'
 import ProfileViewVue from '@/views/ProfileView.vue'
 import DetailViewVue from '@/views/DetailView.vue'
+import { useAuthStore } from '@/stores/auth'
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,29 +40,43 @@ const router = createRouter({
     {
       path: '/new-blog',
       name: 'new-blog',
-      component: NewBlogViewVue
-    },
-    {
-      path: '/new-blog',
-      name: 'new-blog',
-      component: NewBlogViewVue
+      component: NewBlogViewVue,
+      meta: { requiresAuth: true },
     },
     {
       path: '/my-blogs',
       name: 'my-blogs',
-      component: MyBlogsViewVue
+      component: MyBlogsViewVue,
+      meta: { requiresAuth: true },
     },
     {
       path: '/profile',
       name: 'profile',
-      component: ProfileViewVue
+      component: ProfileViewVue,
+      meta: { requiresAuth: true },
     },
     {
       path: '/detail/:id',
       name: 'detail',
-      component: DetailViewVue
+      component: DetailViewVue,
+      meta: { requiresAuth: true },
     },
-  ]
+  ],
+  
+})
+
+router.beforeEach((to, from) => {
+  const {user} = useAuthStore()
+  // instead of having to check every route record with
+  // to.matched.some(record => record.meta.requiresAuth)
+  if (to.meta.requiresAuth && !user.username) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    return {
+      path: '/login',
+      // save the location we were at to come back later
+    }
+  }
 })
 
 export default router
