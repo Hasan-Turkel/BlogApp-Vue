@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import useBlogCalls from '@/hooks/useBlogCalls'
 import { onMounted } from 'vue'
+import FooterVue from '@/components/Footer.vue'
 
 const {getCat, data, sendBlog} = useBlogCalls()
 async function create (values:any) {
@@ -16,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template >
-     <div class="d-flex justify-content-center p-4">
+    <main class="d-flex justify-content-center p-4 mb-4 ">
     <FormKit
     type="form"
     submit-label="Create a New Blog"
@@ -65,11 +66,17 @@ onMounted(() => {
 
   </FormKit>
 
-</div>
+</main>
+<footer >
+    <FooterVue/>
+  </footer>
 </template>
 
 <style scoped>
+main{
+    height: 80vh;
+}
 div{
-    min-width: 300px;
+  min-width: 300px;
 }
 </style>

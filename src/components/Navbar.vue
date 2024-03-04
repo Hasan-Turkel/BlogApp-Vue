@@ -74,5 +74,7 @@ li {
   padding-right: 60px;
   background-color: rgb(172, 233, 235);
   width: 100%;
+  height: 10vh;
+  min-height: 100px;
 }
 </style>

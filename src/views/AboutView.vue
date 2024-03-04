@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import FooterVue from '@/components/Footer.vue'
 </script>
 
 <template>
@@ -29,6 +30,10 @@ import { Icon } from '@iconify/vue'
         </div>
       </div>
     </div>
+    <footer class="position-absolute bottom-0 w-100">
+      <FooterVue/>
+    </footer>
 </template>
+
 
 

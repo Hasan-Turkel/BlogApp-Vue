@@ -7,6 +7,7 @@ import { Icon } from '@iconify/vue'
 import { useAuthStore } from '@/stores/auth'
 import DeleteModal from '@/components/DeleteModal.vue'
 import UpdateModal from '@/components/UpdateModal.vue'
+import FooterVue from '@/components/Footer.vue'
 const { user } = useAuthStore()
 const route = useRoute()
 const id = route.params.id
@@ -40,7 +41,7 @@ const hideModal = () => {
 </script>
 
 <template>
-  <div className="container d-flex flex-column mt-5 m-auto gap-2 ">
+  <main className="container d-flex flex-column mt-5 m-auto gap-2 ">
     <img :src="data.image" className="card-img-top detail-img" :alt="data.title" />
     <div className="card-body ">
       <h5 className="card-title">{{ data.title }}</h5>
@@ -89,15 +90,21 @@ const hideModal = () => {
 
       <CommentCard :id="data.id" :getDetailBlog="getDetailBlog"/>
     </div>
-  </div>
+  </main>
 
   <div>
   </div>
-
+  <footer >
+    <FooterVue/>
+  </footer>
 </template>
 
 <style scoped>
 .detail-img {
   width: 250px;
+}
+
+main{
+  min-height: 80vh;
 }
 </style>

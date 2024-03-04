@@ -14,7 +14,7 @@ const like = props.blog.likes_n?.filter((item:any) => item.user_id == user?.id).
 </script>
 
 <template>
-  <div className="card p-4 " style="width: 300px; max-height: 70vh">
+  <div className="card p-4 " style="width: 300px; max-height: 400px">
     <img :src="blog.image" className="card-img-top h-25 card-img" alt="{title}" />
     <div className="card-body">
       <h5 className="card-title">{{ blog.title }}</h5>
