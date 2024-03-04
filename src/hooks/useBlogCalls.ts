@@ -29,9 +29,13 @@ const useBlogCalls = () => {
     try {
         const { data } = await axiosWithToken.delete(`api/blogs/${id}/`,
     );
+    toast.success("The blog has been deleted.")
+    setTimeout(() => {
       router.go(-1)
+    }, 2000);
+     
     } catch (error) {
-    
+    toast.error("The blog couldn't be deleted.")
     }
   };
 
@@ -40,10 +44,10 @@ const useBlogCalls = () => {
     try {
         const { data } = await axiosWithToken.put(`/api/blogs/${id}/`,values,
         );
-     
+        toast.success("The blog has been updated.")
       
     } catch (error) {
-   
+      toast.error("The blog couldn't be updated.")
     
     }
   };
@@ -53,7 +57,9 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosWithToken.post(`/api/comments/${id}/`, values 
      );
+     toast.success("The comment has been sent.")
     } catch (error) {
+      toast.error("The comment couldn't be sent.")
     }
   };
 
@@ -62,11 +68,16 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosWithToken.post(`/api/blogs/`, values, 
       );
+      toast.success("The blog has been created.")
+
+      setTimeout(() => {
+        router.push("/my-blogs")
+      }, 2000);
      
-      router.push("/my-blogs")
+      
       // console.log(data);
     } catch (error) {
-     
+      toast.error("The blog couldn't be created.")
     }
   };
 

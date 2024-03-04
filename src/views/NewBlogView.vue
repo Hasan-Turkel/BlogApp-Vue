@@ -4,9 +4,9 @@ import { onMounted } from 'vue'
 
 const {getCat, data, sendBlog} = useBlogCalls()
 async function create (values:any) {
-    // sendBlog(values)
+    sendBlog(values)
 
-    console.log(values);
+    // console.log(values);
     
 }
 onMounted(() => {
