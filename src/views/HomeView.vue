@@ -16,6 +16,12 @@ onMounted(() => {
     className="row justify-content-center w-100 my-3 mx-0 gap-4"
     
   >
+
+  <div v-if="!blogs?.length" className="d-flex justify-content-center align-items-center profile-div">
+          <h3>
+           🎉🎉🎉 Welcome to BlogAPP🎉🎉🎉
+          </h3>
+        </div>
     <CardVue v-for="blog in blogs"
     :key="blog.id" :blog="blog" />
   </main>
