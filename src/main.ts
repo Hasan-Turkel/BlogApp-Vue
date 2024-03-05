@@ -3,7 +3,10 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { plugin, defaultConfig } from '@formkit/vue'
+import '@formkit/themes/genesis'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+
 
 import App from './App.vue'
 import router from './router'
@@ -20,9 +23,7 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
-app.use(plugin, defaultConfig({
-    theme: 'genesis' // will load from CDN and inject into document head
-  }))
+app.use(plugin, defaultConfig)
 
 app.use(Modal)
 
